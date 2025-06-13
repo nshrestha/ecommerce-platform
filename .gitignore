@@ -1,2 +1,27 @@
 /.env
 /application-local.yml
+
+node_modules/
+# Ignore build/dist folders
+dist/
+build/
+
+# Ignore IDE-specific files (e.g., VS Code, WebStorm)
+.vscode/
+.idea/
+
+# Ignore OS-specific files (e.g., macOS .DS_Store)
+.DS_Store
+
+# Ignore environment files (Angular/Node.js)
+.env
+.env.local
+
+# Ignore npm/yarn logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore temp folders
+tmp/
+temp/
