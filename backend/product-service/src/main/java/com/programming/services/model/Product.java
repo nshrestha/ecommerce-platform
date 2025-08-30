@@ -1,7 +1,8 @@
 package com.programming.services.model;
 
-import jakarta.persistence.Id;
-import lombok.Data;
+
+import lombok.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,6 +11,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Document(collection = "products")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Data
 public class Product {
     @Id
@@ -24,15 +28,13 @@ public class Product {
     @DBRef
     private List<Category> categories; // Reference to category documents
 
-    private List<String> images;
+    private List<ProductImage> images;
     private List<ProductAttribute> attributes;
+    private ProductInventory inventory;
+    private ProductShipping shipping;
+
     private boolean active;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    @Data
-    public static class ProductAttribute {
-        private String key;
-        private String value;
-    }
 }

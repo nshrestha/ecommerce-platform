@@ -7,6 +7,6 @@ spring:
     name: product-service
   data:
     mongodb:
-      uri: mongodb://localhost:27017/productdb
-      database: productdb
+      uri: mongodb://localhost:27017/product-service
+
 
