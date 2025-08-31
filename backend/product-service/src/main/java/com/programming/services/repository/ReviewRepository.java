@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface ReviewRepository extends MongoRepository<ProductReview, String> {
-    List<ProductReview> findByProductId(String productId);
+   /* List<ProductReview> findByProductId(String productId);
 
     List<ProductReview> findByProductIdOrderByCreatedAtDesc(String productId);
 
@@ -24,6 +24,6 @@ public interface ReviewRepository extends MongoRepository<ProductReview, String>
         String getId();
         Double getAverageRating();
         Integer getReviewCount();
-    }
+    }*/
 
 }

@@ -1,15 +1,9 @@
 package com.programming.services.repository;
 
 import com.programming.services.model.Product;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
-import org.springframework.data.mongodb.repository.Update;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +19,7 @@ public interface ProductRepository extends MongoRepository<Product, String> {
 
     List<Product> findByActiveTrue();
 
-    @Query("{'price': {$gte: ?0, $lte: ?1}}")
+  /*  @Query("{'price': {$gte: ?0, $lte: ?1}}")
     @Modifying
     List<Product> findByPriceRange(BigDecimal minPrice, BigDecimal maxPrice);
 
@@ -51,5 +45,5 @@ public interface ProductRepository extends MongoRepository<Product, String> {
             "    'reviewCount' : ?2 " +
             "  }" +
             "}")
-    void updateRating(String productId, Double averageRating, Integer reviewCount);
+    void updateRating(String productId, Double averageRating, Integer reviewCount);*/
 }

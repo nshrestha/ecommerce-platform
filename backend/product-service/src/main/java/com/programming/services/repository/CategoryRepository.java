@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface CategoryRepository extends MongoRepository<Category, String> {
 
     // Find by slug (unique)
-    Optional<Category> findBySlug(String slug);
+/*    Optional<Category> findBySlug(String slug);
 
     // Find categories by name (case-insensitive)
     List<Category> findByNameContainingIgnoreCase(String name);
@@ -67,5 +67,5 @@ public interface CategoryRepository extends MongoRepository<Category, String> {
     List<Category> findByActiveTrueOrderByDisplayOrderAsc();
 
     // Find categories by multiple slugs
-    List<Category> findBySlugIn(List<String> slugs);
+    List<Category> findBySlugIn(List<String> slugs);*/
 }

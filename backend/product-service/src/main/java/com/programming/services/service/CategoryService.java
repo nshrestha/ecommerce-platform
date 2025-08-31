@@ -22,7 +22,7 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
     private final MongoTemplate mongoTemplate;
 
-    // Get entire category tree
+  /*  // Get entire category tree
     public List<Category> getCategoryTree() {
         List<Category> rootCategories = categoryRepository.findByParentIsNullAndActiveTrue();
 
@@ -34,18 +34,18 @@ public class CategoryService {
     // Recursively populate children
     private Category populateChildren(Category category) {
         List<Category> children = categoryRepository.findByParentIdAndActiveTrue(category.getId());
-      /*  if (children != null && !children.isEmpty()) {
+      *//*  if (children != null && !children.isEmpty()) {
             category.setChildren(children.stream()
                     .map(this::populateChildren)
                     .collect(Collectors.toList()));
-        }*/
+        }*//*
         return category;
     }
 
     // Get all descendants of a category
-    public List<Category> getCategoryDescendants(String categoryId) throws CategoryNotFoundException {
+    public List<Category> getCategoryDescendants(String categoryId, String message) throws CategoryNotFoundException {
         Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new CategoryNotFoundException(categoryId));
+                .orElseThrow(() -> new CategoryNotFoundException(categoryId, message));
 
         return getDescendants(category);
     }
@@ -64,13 +64,13 @@ public class CategoryService {
 
     // Update category hierarchy (ancestors field)
     @Transactional
-    public Category updateCategoryHierarchy(String categoryId, String newParentId) throws CategoryNotFoundException {
+    public Category updateCategoryHierarchy(String categoryId, String message,  String newParentId) throws CategoryNotFoundException {
         Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new CategoryNotFoundException(categoryId));
+                .orElseThrow(() -> new CategoryNotFoundException(categoryId, message));
 
         Category newParent = newParentId != null ?
                 categoryRepository.findById(newParentId)
-                        .orElseThrow(() -> new CategoryNotFoundException(newParentId)) : null;
+                        .orElseThrow(() -> new CategoryNotFoundException(categoryId, message)) : null;
 
         category.setParent(newParent);
         updateAncestors(category, newParent);
@@ -127,11 +127,11 @@ public class CategoryService {
             criteria.and("ancestors").in(ancestors);
         }
 
-        /*Query query = new Query(criteria).with(pageable);
+        *//*Query query = new Query(criteria).with(pageable);
         long count = mongoTemplate.count(query, Category.class);
         List<Category> categories = mongoTemplate.find(query, Category.class);
-*/
+*//*
       //  return new PageImpl<>(categories, pageable, count);
         return null;
-    }
+    }*/
 }
