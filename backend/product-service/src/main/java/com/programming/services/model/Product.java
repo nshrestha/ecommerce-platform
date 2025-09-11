@@ -1,40 +1,34 @@
 package com.programming.services.model;
 
 
-import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
 
-@Document(collection = "products")
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Data
+@Entity
 public class Product {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String name;
     private String description;
     private BigDecimal price;
-    private Integer stockQuantity;
-    private String sku;
-    private String category;
+    private double availableQuantity;
+    // private String sku;
 
-    @DBRef
-    private List<Category> categories; // Reference to category documents
 
-    private List<ProductImage> images;
-    private List<ProductAttribute> attributes;
-    private ProductInventory inventory;
-    private ProductShipping shipping;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
-    private boolean active;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+
+
 
 }
