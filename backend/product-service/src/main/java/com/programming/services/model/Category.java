@@ -1,32 +1,29 @@
 package com.programming.services.model;
 
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
-@Document(collection = "categories")
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
+@Entity
 public class Category {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     private String name;
     private String description;
-    private String slug;
 
-    @DBRef
-    private Category parent; // Self-reference
+    @OneToMany(mappedBy = "category",cascade = CascadeType.REMOVE)
+    private List<Product> products;
 
-    private List<String> ancestors; // Materialized path
-    private Integer displayOrder;
-    private Boolean active;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+
+
 }
